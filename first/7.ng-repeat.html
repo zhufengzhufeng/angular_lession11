@@ -6,8 +6,18 @@
 </head>
 <body ng-controller="myCtrl">
 <ul>
-    <li ng-repeat="a in arrs track by $index">{{a.name}}
+    <!--ng-repeat时 如果只写value in arrs => (key,value) in arrs-->
+    <li ng-repeat="(key,a) in arrs track by $index">
+        {{a.name}} <br>
+        {{$odd}} 是否是奇数行 <br>
+        {{$even}} 是否是偶数行 <br>
+        {{$first}} 是否是第一行 <br>
+        {{$last}} 是否是最后一行 <br>
+        {{$middle}} 是否是中间的那一项 <br>
         <ul>
+            <li ng-repeat="(tkey,t) in a.type track by $index">
+                {{t}}  {{tkey}}  {{key}}
+            </li>
         </ul>
     </li>
 </ul>
@@ -15,8 +25,12 @@
 <script>
     var app = angular.module('appModule',[]);
     app.controller('myCtrl',['$scope',function ($s) {
-        $s.arrs = [{name:'香蕉',type:['黄色','绿色']},{name:'苹果',type:['金色','红色','绿色']},{name:"橘子",type:['绿色']}];
-    }]);
+        $s.arrs = [
+                    {name:'香蕉',type:['黄色','绿色']},
+                    {name:'苹果',type:['金色','红色','绿色']},
+                    {name:"橘子",type:['绿色']}
+                 ];
+        }]);
 </script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="myCtrl">
+<ul>
+    <!--拥有index索引-->
+    <li ng-repeat="(key,o) in objs">{{key}}:{{o}} {{$index}}</li>
+</ul>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',function ($scope) {
+        $scope.objs = {
+            name:'zfpx',
+            age:8,
+            type:'school',
+            address:'回龙观'
+        }
+    });
+
+</script>
+</body>
+</html>
