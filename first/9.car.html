@@ -43,7 +43,11 @@
         //全选全不选
         $scope.all = function () {
             //alert($scope.selectAll); //因为ng-model的值定义到了当前作用域下
-        }
+            $scope.products.forEach(function (item) {
+                item.isSelected = $scope.selectAll;
+            });
+        };
+        //作业:点击下面的checkbox,假设法，默认为全选，遍历每一个商品，有一个没选中，就为非全选状态 （find）
     }]);
 </script>
 </body>
