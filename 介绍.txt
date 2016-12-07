@@ -1,0 +1,9 @@
+姜文 手机:18310349227 qq:1035465284
+6周node
+前三周全日制angularJS
+后两周 gulp + webpack + react
+最后一周实战课
+周末 主讲node
+前两周node基础
+第三四周express + mongodb + 博客项目
+第五周 聊天室+爬虫
