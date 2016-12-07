@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<input type="text" ng-model="age">
+<!--{{age}}-->
+<div ng-bind="age?age:'zfpx'"></div>
+<!--属性是不会展示到页面上的，当angular加载后，在将数据插入到div中-->
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //1.{{}}可以进行赋值运算
+    //2.三元表达式
+    //3.可以做简单的运算
+    //{{}}是ng-bind简写
+</script>
+</body>
+</html>
