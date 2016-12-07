@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" >
+</head>
+<body ng-controller="cartCtrl">
+<table class="table table-bordered">
+    <tr>
+        <th>全选</th><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th>
+    </tr>
+    <tr>
+        <td><input type="checkbox" ></td>
+        <td>iphone6plus</td>
+        <td>2000</td>
+        <td>1</td>
+        <td>2000</td>
+        <td><button class="btn btn-danger">删除</button></td>
+<!--成功绿色 success 删除红色 danger 修改黄色 warning 蓝色 primary 默认 default-->
+    </tr>
+</table>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl',['$scope',function ($scope) { //$scope viewModel
+        $scope.products = [
+            {isSelected:true,name:'iphone5s',price:2000,count:1,id:1},
+            {isSelected:false,name:'iphone6s',price:300,count:2,id:2},
+            {isSelected:true,name:'iphone7s',price:500,count:3,id:3},
+            {isSelected:true,name:'iphone4s',price:800,count:4,id:4},
+        ]
+    }]);
+</script>
+</body>
+</html>
