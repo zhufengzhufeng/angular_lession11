@@ -25,3 +25,46 @@
 npm install angular
 ```
 > 通过npm来下载，别人上传上去的‘包’,默认安装到当前目录的node_modules文件夹中，如果上级目录有node_modules 会安装到上级中
+
+## ng-app
+- 让angular用哪个模块来运行，会指定一个模块的名字，会产生一个$rootScope
+## ng-model
+```
+ng-model='name'
+```
+- 实现双向数据绑定的，当前作用域下没有变量，在当前作用域下声明，如果有变量，将name的值绑定给input标签，（数据影响视图）如果input中内容改变，会改变当前作用域上的（视图影响数据）
+## ng-bind
+- 和{{}}作用域一样，{{}}是ng-bind的简写，不会导致页面的闪烁
+- 1.支持简单的运算
+- 2.支持三元运算符
+- 3.支持赋值操作
+
+> 标签中的内容会被覆盖掉
+
+## ng-cloak
+```
+[ng-cloak]{
+    display:none
+}
+```
+- 在所有闪烁的标签上增加ng-cloak属性
+
+## 模块化
+```
+var app = angular.module('moduleName',[]);
+```
+## 控制器
+- 使用控制器
+```
+<div ng-controller="controlName">{{a}}</div>
+```
+```
+app.controller('controlName',function($scope){
+    $scope.a = 1;
+})
+```
+## run方法
+```
+app.run(function($rootScope){
+})
+```

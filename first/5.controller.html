@@ -5,21 +5,31 @@
     <title>Title</title>
 </head>
 <body>
-<div ng-controller="oneCtrl">
-    {{age}}
-</div>
 <div ng-controller="twoCtrl">
     {{name}}
+    <div ng-controller="oneCtrl">
+        {{name}}
+    </div>
 </div>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
+    //当我们ng-controller指向了某一个控制器，这个控制器将被执行
+    app.run(function ($rootScope) {//将公有的代码放在run中
+        $rootScope.name = 'zfpx1';
+    });
     app.controller('oneCtrl',function ($scope) {
         $scope.age = 8;
     });
     app.controller('twoCtrl',function ($scope) {
         $scope.name = 'zfpx';
     });
+    //只能子找父，不能父找子，控制器可以嵌套。
+
+    //1.控制器可以嵌套
+    //2.控制器会产生一个独立作用域
+    //3.作用范围，与dom平齐
+    //4.不要复用控制器，而且不要操作DOM
 </script>
 </body>
 </html>
