@@ -28,3 +28,6 @@ arr = arr.map(function (item) {
     return item;
 });
 console.log(arr);
+//filter 返回true 留下 false 是删除 返回新数组
+//find 返回true 找到了那一项，返回那一项
+//map  可以把某一项进行替换。
