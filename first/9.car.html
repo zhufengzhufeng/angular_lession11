@@ -11,7 +11,7 @@
 <body ng-controller="cartCtrl" >
 <table class="table table-bordered" ng-cloak>
     <tr>
-        <th><input type="checkbox" />全选</th><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th>
+        <th><input type="checkbox" ng-model="selectAll" ng-click="all()"/>全选</th><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th>
     </tr>
     <tr ng-repeat="v in products track by $index" >
         <!--在angular中所有input元素的取值，设置值，都是从ng-model获取到的-->
@@ -35,7 +35,14 @@
             {isSelected:true,name:'iphone4s',price:800,count:4,id:4},
         ];
         $scope.del = function (product) {
-            //拿到了当前的一个商品，去所有商品中移除掉
+            //拿到了当前的一个商品，去所有商品中移除掉  filter
+            $scope.products = $scope.products.filter(function (item) {
+                return item!=product;
+            });
+        };
+        //全选全不选
+        $scope.all = function () {
+            //alert($scope.selectAll); //因为ng-model的值定义到了当前作用域下
         }
     }]);
 </script>
