@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="myCtrl">
+<ul>
+    <!--li遍历的时候会生成n个作用域 $index代表遍历时的索引-->
+    <li ng-repeat="v in arrs track by $index">{{v}}</li>
+</ul>
+<!--想要循环谁就在谁身上写repeat-->
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app=angular.module("appModule",[]);
+    //数组的方式声明，防止压缩，数组的第一项对应函数的第一个参数
+    app.run(['$rootScope',function (a) {}]);
+    app.controller("myCtrl",["$scope","$rootScope",function($scope,$rootScope){
+        $scope.arrs= ["橘子","苹果"];
+    }]);
+</script>
+<!--
+    数字 字符串 对象 数组 函数
+-->
+</body>
+</html>
