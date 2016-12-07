@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="oneCtrl">
+    {{age}}
+</div>
+<div ng-controller="twoCtrl">
+    {{name}}
+</div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('oneCtrl',function ($scope) {
+        $scope.age = 8;
+    });
+    app.controller('twoCtrl',function ($scope) {
+        $scope.name = 'zfpx';
+    });
+</script>
+</body>
+</html>

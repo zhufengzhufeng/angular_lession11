@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" ng-model="name">
+<!--ng-都是angular自带的指令-->
+<style>
+    [ng-cloak]{
+        display: none;
+    }
+</style>
+<div ng-cloak>
+    <li>{{name}}哈哈</li>
+    <li>{{name}}</li>
+    <li>{{name}}</li>
+</div>
+<!--先将带有ng-cloak属性全部隐藏掉，angular加载完后，将ng-cloak属性移除掉-->
+<script src="node_modules/angular/angular.js"></script>
+</body>
+</html>

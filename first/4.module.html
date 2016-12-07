@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--告诉angular以哪一个模块来启动angularjs-->
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="aCtrl">{{name}}</div>
+<div ng-controller="bCtrl">{{name}}</div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //创建模块
+    //1.模块的名字
+    //2.模块的依赖,如果没有依赖的模块增加一个空数组
+    //写数组的是创建，不写表示获取
+    var app = angular.module('appModule',[]);
+    //app代表的是当前的模块
+    //创建子作用域，防止污染全局变量
+    //创建控制器(会买一送一 送你一个作用域)
+    //1.控制器的名字
+    //2.控制器的定义
+    app.controller('aCtrl',function ($scope) {
+        $scope.name = 'zfpx';//相当于挂载在当前的作用域下
+    });
+    app.controller('bCtrl',function ($scope) {
+        $scope.name = 'zfpx111';//相当于挂载在当前的作用域下
+    });
+</script>
+<script>
+    //angular有自己的模块化，一切从模块开始
+    //名字不能保证重名，调用过长
+
+</script>
+</body>
+</html>
