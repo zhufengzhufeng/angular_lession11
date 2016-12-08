@@ -11,6 +11,7 @@
 <body>
 <div drag></div>
 <div drag></div>
+<script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
@@ -18,17 +19,17 @@
         return {
             restrict:'A',
             link:function (scope,element,attrs) {
-                element.on('mousedown',function (e) {
-                    var disX = e.pageX - this.offsetLeft;
-                    var disY = e.pageY - this.offsetTop;
-                    angular.element(document).on('mousemove',function (e) {
-                        element.css({
-                            left:e.pageX-disX + 'px',
-                            top:e.pageY - disY +'px'
+                $(element).on('mousedown',function (e) {
+                    var disX = e.pageX - $(this).offset().left;
+                    var disY = e.pageY - $(this).offset().top;
+                    $(document).on('mousemove',function (e) {
+                        $(element).css({
+                            left:e.pageX-disX,
+                            top:e.pageY - disY
                         });
                     });
-                    angular.element(document).on('mouseup',function () {
-                        angular.element(document).off('mouseup');
+                    $(document).on('mouseup',function () {
+                       $(document).off();
                     });
                     e.preventDefault();
                 });
