@@ -7,13 +7,16 @@
     <script src="../../www/gulpfile.js"></script>
 </head>
 <body class="container" ng-controller="panelCtrl">
-<panel t="title" f="{{tail}}">这是jquery的第一篇文章</panel>
+<panel t="title" f="{{tail}}" h="hello(a,b)" >这是jquery的第一篇文章</panel>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
     app.controller('panelCtrl',function ($scope) {
-        $scope.title = '哈哈angularBaby'; //这个参数用=取
-        $scope.tail = '这是panel的尾部';//这个参数用@符取
+        $scope.title = '哈哈angularBab111y'; //这个参数用=取
+        $scope.tail = '这是panel的尾部222';//这个参数用@符取
+        $scope.hello = function (who,who1) {
+            alert(who+who1);
+        };
     });
     app.directive('panel',function () {
         return {
@@ -23,6 +26,7 @@
             scope:{
                 title:'=t',
                 tail:'@f',
+                q:'&h'
             }
         }
     });
