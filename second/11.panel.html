@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../../www/gulpfile.js"></script>
+</head>
+<body class="container" ng-controller="panelCtrl">
+<panel t="title" f="{{tail}}">这是jquery的第一篇文章</panel>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('panelCtrl',function ($scope) {
+        $scope.title = '哈哈angularBaby'; //这个参数用=取
+        $scope.tail = '这是panel的尾部';//这个参数用@符取
+    });
+    app.directive('panel',function () {
+        return {
+            restrict:'E',
+            templateUrl:'tmpl/panel.html',
+            transclude:true,
+            scope:{
+                title:'=t',
+                tail:'@f',
+            }
+        }
+    });
+</script>
+</body>
+</html>

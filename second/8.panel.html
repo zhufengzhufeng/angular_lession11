@@ -8,11 +8,14 @@
 </head>
 <body class="container">
 <!--保留指令之间夹着的内容-->
-<panel title="标题1哈哈">这是jquery的第一篇文章</panel>
-<panel title="标题2哈哈">这是jquery的第一篇文章1</panel>
+<panel >这是jquery的第一篇文章</panel>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
+    app.controller('panelCtrl',function ($scope) {
+        $scope.title = '哈哈angularBaby'; //这个参数用=取
+        $scope.tail = '这是panel的尾部';//这个参数用@符取
+    });
     app.directive('panel',function () {
         return {
             restrict:'E', //不能写c class 因为class的名字也有叫panel的
