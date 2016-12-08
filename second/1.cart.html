@@ -43,14 +43,16 @@
         };
         $scope.selectOne = function () {
             // 循环所有数据如果有一个为假 就为假
-            var flag = true;
+
             //forEach不能使用return 跳出循坏
             var product = $scope.products.find(function (item) {
                 //返回true，外面的返回的是找到的那一项，找不到则是undefined
                 return !item.isSelected
             });
             $scope.all = product?false:true;
-            /*$scope.products.forEach(function (item) {
+            /*
+            var flag = true;
+            $scope.products.forEach(function (item) {
                 if(!item.isSelected){
                     flag = false;
                 }
