@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body class="container">
+<!--保留指令之间夹着的内容-->
+<panel>这是jquery的第一篇文章</panel>
+<panel>这是jquery的第一篇文章1</panel>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.directive('panel',function () {
+        return {
+            restrict:'E', //不能写c class 因为class的名字也有叫panel的
+            templateUrl:'tmpl/panel.html',//ajax将文件读取过来插入到模板中
+            transclude:true,//你想让内容放到什么位置上就要在放置的标签上增加ng-transclude 属性,带有ng-transclude的标签会生成一个作用域
+        }
+    });
+</script>
+</body>
+</html>
