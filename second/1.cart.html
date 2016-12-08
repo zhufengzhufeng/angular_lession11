@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-controller="carCtrl">
+<table class="table table-bordered">
+    <tr>
+        <th><input type="checkbox" ng-model="all" ng-change="selectAll ()">全选</th><th>商品名称</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th>
+    </tr>
+    <tr ng-repeat="product in products track by $index">
+        <td><input type="checkbox" ng-model="product.isSelected" ng-click="selectOne()"></td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td><input type="text" ng-model="product.count"></td>
+        <td>{{product.price*product.count}}</td>
+        <td><button class="btn btn-danger" ng-click="remove(product)">删除</button></td>
+    </tr>
+</table>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('zfModule',[]);
+    app.controller('carCtrl',['$scope',function ($scope) {
+        $scope.products = [
+            {isSelected:true,name:'iphone5s',price:2000,count:1,id:1},
+            {isSelected:false,name:'iphone6s',price:300,count:2,id:2},
+            {isSelected:true,name:'iphone7s',price:500,count:3,id:3},
+            {isSelected:true,name:'iphone4s',price:800,count:4,id:4},
+        ];
+        //删除记录
+        $scope.remove = function (product) {
+            $scope.products = $scope.products.filter(function (item) {
+                return item!=product;
+            });
+        };
+        //全选非全选
+        $scope.selectAll = function () {
+            $scope.products.forEach(function (item) {
+                item.isSelected = $scope.all;
+            })
+        };
+        $scope.selectOne = function () {
+            // 循环所有数据如果有一个为假 就为假
+            var flag = true;
+            //forEach不能使用return 跳出循坏
+            var product = $scope.products.find(function (item) {
+                //返回true，外面的返回的是找到的那一项，找不到则是undefined
+                return !item.isSelected
+            });
+            $scope.all = product?false:true;
+            /*$scope.products.forEach(function (item) {
+                if(!item.isSelected){
+                    flag = false;
+                }
+            });
+            $scope.all = flag;*/
+        }
+    }]);
+</script>
+</body>
+</html>
