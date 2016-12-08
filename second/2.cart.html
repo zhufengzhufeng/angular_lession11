@@ -19,17 +19,17 @@
             <input type="text" ng-model="product.count" ng-readonly="true">
             <button ng-click="product.count=product.count+1">+</button>
         </td>
-        <td>{{product.price*product.count}}</td>
+        <td>{{product.price*product.count | currency:'￥'}}</td>
         <td><button class="btn btn-danger" ng-click="remove(product)">删除</button></td>
     </tr>
     <tr>
         <!--将sum return后的结果，显示到页面上-->
-        <td colspan="6">总价{{sum()}} <button ng-click="removeAll()">删除选中的</button>
+        <td colspan="6">总价{{sum() | currency:'￥'}} <button ng-click="removeAll()">删除选中的</button>
             <!--ng-change="sel()" 想在代码中取到对应的select值需要通过change事件-->
             <select ng-model="selected">
                 <option value="{{c.tech}}" ng-repeat="c in coast">{{c.client}}</option>
             </select>
-            折后价格{{sum()*selected}}
+            折后价格{{sum()*selected | currency:'￥':0}}
         </td>
     </tr>
 </table>
@@ -42,10 +42,10 @@
             alert($scope.selected);
         };*/
         $scope.products = [
-            {isSelected:true,name:'iphone5s',price:2000,count:1,id:1},
-            {isSelected:true,name:'iphone6s',price:300,count:2,id:2},
-            {isSelected:true,name:'iphone7s',price:500,count:3,id:3},
-            {isSelected:true,name:'iphone4s',price:800,count:4,id:4},
+            {isSelected:true,name:'iphone5s',price:99.9,count:1,id:1},
+            {isSelected:true,name:'iphone6s',price:88,count:2,id:2},
+            {isSelected:true,name:'iphone7s',price:66,count:3,id:3},
+            {isSelected:true,name:'iphone4s',price:33,count:4,id:4},
         ];
         $scope.remove = function (product) {
             $scope.products = $scope.products.filter(function (item) {
@@ -83,7 +83,7 @@
             });
         }
         //打折功能 select
-        $scope.coast = [{client:'一折',tech:'0.1'},{client:'五折',tech:'0.5'}]
+        $scope.coast = [{client:'一折',tech:'0.3'},{client:'五折',tech:'0.5'}]
 
     }]);
 </script>

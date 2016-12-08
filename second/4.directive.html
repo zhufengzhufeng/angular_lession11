@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--元素element  E -->
+<zf-xxx></zf-xxx>
+<!--属性 attribute  A-->
+<div zf-xxx></div>
+<!--样式 class   C-->
+<div class="zf-xxx"></div>
+<!--注释 comment   M-->
+<!-- directive:zf-xxx -->
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //需要转换成驼峰命名法,标签名为-连接
+    app.directive('zfXxx',function () {//声明指令后默认返回一个对象
+       return {
+//        默认支持的只有EA生效
+          restrict:'ACME',
+          replace:true,
+          template:'<div><h1>welcome zf</h1><span>hello</span></div>',//模板中根节点只有一个
+       }
+    });
+</script>
+<!--directive:指令 (可以复用) 用指令封装功能
+    1.组件式指令 :有模板的
+    2.装饰型指令：增加属性的
+    指令是否依赖于控制器：不依赖
+-->
+</body>
+</html>

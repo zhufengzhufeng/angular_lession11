@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--组件式 一般采用E-->
+<!--装饰型 一般采用A-->
+<div red-border gender="0">hello angular baby</div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //默认指令是不会创建作用域
+    var app = angular.module('appModule',[]);
+    app.directive('redBorder',function () {
+        return {
+            restrict:'A',
+            //形参
+            link:function (scope,element,attrs) {//链接 视图和作用域的，特点：唯一一个可以操作dom的地方
+                //scope:当前指令所在的作用域
+                //element 是一个jq对象 ,指向的是当前指令所在的元素
+                //attrs： 当前指令的所有属性变成一个对象格式
+                //console.log(angular.element(element[0]))
+                //element.css('border','1px solid red');
+                element.css('fontSize','40px');
+                angular.element(document).on('click',function () {
+                    //alert(21)
+                });
+                console.log(attrs);
+            }
+        }
+    })
+</script>
+</body>
+</html>
