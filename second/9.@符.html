@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body ng-controller="myCtrl">
+<input type="text" ng-model="name">
+<cur-text title="{{name}}"></cur-text>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //有控制还有指令
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',function ($scope) {
+        $scope.name = 'hello';
+    });
+    app.directive('curText',function () {
+        return {
+            restrict:'E',
+            template:`<h1>{{name}}</h1>
+                      <input type="text" ng-model="name">
+                     `,//内部的name是新声明的一个字符串，和外面的没关系，里面改变不会影响外面
+            //scope:true,//仍然可以找到上级的作用域 儿子和父亲仍然有关系
+            scope:{
+                name:'@title'  //$scope.name = {{name}}
+            } //断绝父子关系，要获取控制器上的数据,只能通过属性传递props
+        }
+    })
+</script>
+</body>
+</html>

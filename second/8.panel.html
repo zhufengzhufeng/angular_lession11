@@ -22,8 +22,8 @@
                 scope.tit = attrs.title;
             },//让指令拥有自己的作用域*/
             scope:{
-               tit:'@title'  //$scope.tit = '标题2哈哈'
-            }  //{} 和 true 是有区别的
+               title:'@'  //$scope.tit = '标题2哈哈'，取的是指令上属性对应的字符串,如果在当前作用域下声明的名字和属性名相同@符引用不用加名字
+            }//{} 和 true 是有区别的
         }
     });
 </script>
