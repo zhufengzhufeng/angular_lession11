@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<select id="select">
+    <!--option中间的内容是 用户看到的 value是给程序员看的-->
+    <option value="1">内容1</option>
+    <option value="2">内容2</option>
+    <option value="3">内容3</option>
+</select>
+<script>
+    select.onchange = function (e) {
+        alert(e.target.value)
+    };
+    /*select.onclick = function () {
+        alert(this.value)
+    }*/
+    /*Array.from(document.querySelectorAll('option')).forEach(function (item) {
+        item.onclick = function () {
+            alert(this.value)
+        }
+    })*/
+</script>
+</body>
+</html>

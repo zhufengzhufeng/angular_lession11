@@ -24,13 +24,23 @@
     </tr>
     <tr>
         <!--将sum return后的结果，显示到页面上-->
-        <td colspan="6">总价{{sum()}} <button>删除选中的</button></td>
+        <td colspan="6">总价{{sum()}} <button ng-click="removeAll()">删除选中的</button>
+            <!--ng-change="sel()" 想在代码中取到对应的select值需要通过change事件-->
+            <select ng-model="selected">
+                <option value="{{c.tech}}" ng-repeat="c in coast">{{c.client}}</option>
+            </select>
+            折后价格{{sum()*selected}}
+        </td>
     </tr>
 </table>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('zfModule',[]);
     app.controller('carCtrl',['$scope',function ($scope) {
+        $scope.selected = '0.5';
+       /* $scope.sel = function () {
+            alert($scope.selected);
+        };*/
         $scope.products = [
             {isSelected:true,name:'iphone5s',price:2000,count:1,id:1},
             {isSelected:true,name:'iphone6s',price:300,count:2,id:2},
@@ -64,7 +74,17 @@
                 }
             });
             return total;
+        };
+        //删除所有商品
+        $scope.removeAll = function () {
+            //判断所有商品中哪个选中了 过滤掉
+            $scope.products = $scope.products.filter(function (item) {
+                return !item.isSelected;
+            });
         }
+        //打折功能 select
+        $scope.coast = [{client:'一折',tech:'0.1'},{client:'五折',tech:'0.5'}]
+
     }]);
 </script>
 </body>
