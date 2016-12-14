@@ -18,17 +18,21 @@
             //scope当前作用域，如果自己家没有那就向上找作用域
             //ele:当前指令所在的元素
             //attrs:是当前指令所有的属性集合
-            /*link:function (scope,ele,attrs) {
-                scope.title = attrs.title;
+            link:function (scope,ele,attrs) {
+                scope.fn = function () {
+                   scope.flag = !scope.flag;
+                };
+                scope.flag = true;
+                //scope.title = attrs.title;
                 //console.log(attrs.title);
-            },*/
-            scope:{
-                title:'@title'
+            },
+            scope:{ //对象中取得都是对应的属性
+                title:'@title',
             },
             template:`
                 <div>
-                    <div>{{title}}</div>
-                    <div ng-transclude></div>
+                    <div class="title" ng-click="fn()">{{title}}</div>
+                    <div class="content" ng-transclude ng-show="flag"></div>
                 </div>
             `,
         }
@@ -36,3 +40,8 @@
 </script>
 </body>
 </html>
+
+<style>
+    .title{background: red; width: 150px;line-height: 30px;border-radius: 3px 3px 0 0}
+    .content{background:green;width: 150px;height: 150px;}
+</style>
