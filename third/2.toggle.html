@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .show{display: block}
+        .hide{display: none}
+    </style>
+</head>
+<body>
+<!--点击标题 内容发生切换（显示隐藏/隐藏显示）-->
+<div ng-click="flag=!flag">标题</div>
+<!--如果是简单的css样式切换 使用ng-show和ng-hide即可-->
+<!--dom操作控制显示隐藏还是隐藏显示 ng-if会产生一个独立作用域，来存放删除掉的内容-->
+<div ng-if="flag">内容</div>
+<toggle></toggle>
+<toggle></toggle>
+<toggle></toggle>
+<!--封装组件-->
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app=angular.module('appModule',[]);
+    app.directive('toggle',function () {
+        return {
+            template:`
+                <div>
+                    <div>标题</div>
+                    <div >内容</div>
+                </div>
+            `
+        }
+    })
+    app.controller('first',function ($scope) {
+        $scope.fn=function () {
+            $scope.flag=!$scope.flag
+        }
+    })
+</script>
+</body>
+</html>

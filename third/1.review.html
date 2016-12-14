@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="appModule">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+{{url}}
+<hello path="{{url}}" path1="url" fn1="fn(w)">i cry</hello>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //程序运行时最先执行的是什么方法
+    app.run(function ($rootScope) {
+        $rootScope.url = 'http://localhost';
+        $rootScope.fn = function (who) {
+            alert(who)
+        };
+    });
+    //组件和装饰(指令默认是没有作用域的)
+    app.directive('hello',function () {
+        return {
+            link:function (scope,element,attrs) {
+                //scope当前作用域（指令） 和自己声明的独立作用域是一个，如果没有独立作用域,就是包含当前指令的作用域
+                //attrs 当前指令的属性
+                //element 当前指令的jquery对象
+            },
+            replace:true,//只要有replace就只能有一个根节点
+            transclude:true,//包括指令中的内容
+            template:`
+                <div>
+                    <h1>{{url}} <span  ng-transclude></span></h1>
+                    <button ng-click="f({w:'hello'})">say hello</button>
+                </div>
+`,
+            restrict:'ECMA',//限制使用范围
+            //scope:true,//会产生作用域，但是仍然可以取作用域上的东西
+            /*scope:{
+                //url:'@path', 字符串
+                url:'=path1', //变量
+                f:'&fn1'//函数
+            }//完全断绝关系，不能取到上级作用域的内容，通过属性可以传递数据(数据类型 字符串 变量 函数)*/
+        }
+    });
+</script>
 </body>
 </html>
