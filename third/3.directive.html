@@ -5,11 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<toggle title="切换面板1">内容1</toggle>
-<toggle title="切换面板2">内容2</toggle>
+<toggle title="title1" s="say(title)">内容1</toggle>
+<toggle title="title2" s="say(title)">内容2</toggle>
+<toggle title="title3" s="say(title)">内容3</toggle>
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
+    app.run(function ($rootScope) {
+        $rootScope.title1 = 'hello1';
+        $rootScope.title2 = 'hello2';
+        $rootScope.title3 = 'hello3';
+        //想让指令调用外部的say方法，但是指令已经完全和外面没关系了，属性传递
+        $rootScope.say = function (title) {
+            alert(title)
+        }
+    });
     app.directive('toggle',function () {
         return {
             restrict:'E',
@@ -18,7 +28,7 @@
             //scope当前作用域，如果自己家没有那就向上找作用域
             //ele:当前指令所在的元素
             //attrs:是当前指令所有的属性集合
-            link:function (scope,ele,attrs) {
+            link:function (scope,ele,attrs) {//操作dom，链接函数，连接视图和作用域
                 scope.fn = function () {
                    scope.flag = !scope.flag;
                 };
@@ -27,12 +37,13 @@
                 //console.log(attrs.title);
             },
             scope:{ //对象中取得都是对应的属性
-                title:'@title',
+                t:'=title',
+                say:'&s'
             },
             template:`
                 <div>
-                    <div class="title" ng-click="fn()">{{title}}</div>
-                    <div class="content" ng-transclude ng-show="flag"></div>
+                    <div class="title" ng-click="fn()">{{t}}</div>
+                    <div class="content" ng-transclude ng-show="flag" ng-click="say({title:t})"></div>
                 </div>
             `,
         }
