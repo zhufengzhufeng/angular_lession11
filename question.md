@@ -93,5 +93,39 @@ return {
 - ng-repeat ng-repeat="a in arr"
 
 
+## git add有什么作用 什么时候执行
+添加到暂存区，在提交到历史区之前
 
+## git log
+搜索
+```
+--author/--grep
+```
 ## git上传静态页面
+- 先写好内容
+- 创建分支gh-pages
+```
+git checkout -b gh-pages
+```
+- 连接远程仓库
+```
+git remote add 别名 地址
+```
+- 推送
+```
+git push 别名 gh-pages
+```
+
+## git diff
+- 工作区和暂存区
+```
+git diff
+```
+- 工作区和历史区
+```
+git diff 分支名
+```
+- 暂存区和历史区
+```
+git diff --cached
+```

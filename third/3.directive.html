@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<!--
+$scope.arr = ['red','green','yellow']
+<slider data="arr" interval="3000" btn="true"></slider>
+-->
 <toggle title="title1" s="say(title)">内容1</toggle>
 <toggle title="title2" s="say(title)">内容2</toggle>
 <toggle title="title3" s="say(title)">内容3</toggle>
@@ -29,7 +33,7 @@
             //ele:当前指令所在的元素
             //attrs:是当前指令所有的属性集合
             link:function (scope,ele,attrs) {//操作dom，链接函数，连接视图和作用域
-                scope.fn = function () {
+                scope.fn = function (a) {
                    scope.flag = !scope.flag;
                 };
                 scope.flag = true;
@@ -38,7 +42,7 @@
             },
             scope:{ //对象中取得都是对应的属性
                 t:'=title',
-                say:'&s'
+                say:'&s'//引入的函数传递参数必须使用对象格式
             },
             template:`
                 <div>
@@ -46,6 +50,7 @@
                     <div class="content" ng-transclude ng-show="flag" ng-click="say({title:t})"></div>
                 </div>
             `,
+            //写一个angular轮播图
         }
     });
 </script>
