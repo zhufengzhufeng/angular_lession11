@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [ng-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-cloak ng-if="false">
+    {{user.name}}
+    <div ng-repeat="(key,a) in arrs" >
+        {{a.name}}
+        <div ng-repeat="b in a.type">
+            {{b}}{{key}}
+        </div>
+    </div>
+</div>
+
+
+hello
+<div ng-if="arrs.length">
+    <div ng-repeat="a in arrs">{{a}}</div>
+</div>
+<div ng-bind="user.name?1:2">123123131</div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[])
+    .run(function ($rootScope) {
+        $rootScope.user = {};
+        $rootScope.user.name =1;
+        $rootScope.arrs = []
+    });
+</script>
+</body>
+</html>

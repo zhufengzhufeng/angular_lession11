@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<toggle title="切换面板1">内容1</toggle>
+<toggle title="切换面板2">内容2</toggle>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.directive('toggle',function () {
+        return {
+            restrict:'E',
+            replace:true,
+            transclude:true,
+            //scope当前作用域，如果自己家没有那就向上找作用域
+            //ele:当前指令所在的元素
+            //attrs:是当前指令所有的属性集合
+            /*link:function (scope,ele,attrs) {
+                scope.title = attrs.title;
+                //console.log(attrs.title);
+            },*/
+            scope:{
+                title:'@title'
+            },
+            template:`
+                <div>
+                    <div>{{title}}</div>
+                    <div ng-transclude></div>
+                </div>
+            `,
+        }
+    });
+</script>
+</body>
+</html>

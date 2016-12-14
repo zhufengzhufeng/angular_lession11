@@ -18,24 +18,26 @@
 <toggle></toggle>
 <toggle></toggle>
 <!--封装组件-->
+<toggle title="绑定">内容</toggle>
+<toggle title="绑定1">内容2</toggle>
+<toggle title="绑定2">内容3</toggle>
 <script src="node_modules/angular/angular.js"></script>
 <script>
-    var app=angular.module('appModule',[]);
+    var app = angular.module('appModule',[]);
     app.directive('toggle',function () {
-        return {
-            template:`
-                <div>
-                    <div>标题</div>
-                    <div >内容</div>
-                </div>
-            `
+        return{
+            template:`<div>
+              <div ng-click="flag=!flag">{{title}}</div>
+              <div ng-hide="!flag" ng-transclude></div>
+              </div>
+             `,
+            transclude:true,
+            scope:{
+                title:'@'
+            }
         }
     })
-    app.controller('first',function ($scope) {
-        $scope.fn=function () {
-            $scope.flag=!$scope.flag
-        }
-    })
+
 </script>
 </body>
 </html>
