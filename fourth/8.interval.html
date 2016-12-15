@@ -12,10 +12,10 @@
     app.controller('ctrl',function ($scope,$interval,$timeout) {
         $scope.time = new Date().getTime();
         //原生js改变数据是不会触发视图刷新的
-       /* setInterval(function () {
+        /*setInterval(function () {
             $scope.time = new Date().getTime();
             //每次修改后要通知angular来修改视图
-            $scope.$apply();//原生修改数据时使用
+            $scope.$apply();//原生修改数据时使用,强制刷新视图
         },1000);*/
 
         var timer = $interval(function () { //$interval是自带的，会触发视图的刷新 (服务)

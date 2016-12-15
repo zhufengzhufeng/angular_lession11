@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<input type="text" ng-model="age">-->
+<input type="text" zf-model="name">
+{{name}}
+<script src="node_modules/angular/angular.js"></script>
+<!--1.在input输入内容时会在当前作用域上声明一个变量，-->
+<script>
+    var app = angular.module('appModule',[]);
+    app.directive('zfModel',function () {
+        return {
+            link:function (scope,element,attrs) {
+                //当用户输入时触发的事件
+                element.on('input',function () {
+                    //取当前zf-model对应的名字，给scope赋值
+                    scope[attrs['zfModel']] =  this.value;//数据改变，但是视图没有跟随刷新
+                    scope.$apply();
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
