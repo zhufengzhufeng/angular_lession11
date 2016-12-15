@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+        #slider{width: 300px;position: relative;border: 1px solid red;;overflow: hidden;height: 100px}
+        ul{position: absolute}
+        ul li {list-style: none;float: left}
+        img{width: 300px;height: 100px}
+        .btn{width: 20px;height: 20px;background: red; z-index: 1;position: absolute;top: 50%;margin-top: -10px}
+        .btn:nth-child(1){left:0;}
+        .btn:nth-child(3){right:0}
+    </style>
+</head>
+<body ng-controller="myCtrl">
+<slider path ="arr" interval="3000" flag="true"></slider>
+<script src="./node_modules/angular/angular.js"></script>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',function ($scope) {
+        $scope.arr = ['./1.jpg','./2.jpg'];
+    });
+    app.directive('slider',function () {
+        return {
+            restrict:'E',
+            replace:true,
+            template:`
+            <div id="slider">
+            <a class="btn" ng-show="flag=='true'">左</a>
+                <ul>
+                    <li ng-repeat="a in paths track by $index"><img ng-src="{{a}}" ></li>
+                </ul>
+            <a class="btn" ng-show="flag=='true'">右</a>
+            </div>
+            `,
+            link:function (scope,element) {
+                //克隆第一页
+                scope.paths.push(scope.paths[0]);
+                //默认宽度为300也可传入
+                var wLi = 300;
+                //找到ul
+                var $ele = $(element).find('ul');
+                //默认从0开始
+                var index = 0;
+                var imgLen = scope.paths.length;
+                var timer = ''
+                //设置ul宽度
+                $ele.width(wLi*imgLen);
+                //移动方法
+                function move() {
+                    $ele.animate({'left':-wLi*index},1000,function () {
+                        //当图片到达最后一张设置为1
+                        if (index == imgLen - 1) {
+                            index = 0;
+                            $ele.css("left", "0px");
+                        }
+                    });
+                };
+                go();//默认初始化下一页
+                function go() {
+                    timer = setInterval(function () {
+                        index++;
+                        move();
+                    },scope.interval);
+                }
+                //鼠标离开ul后自动启动
+                $ele.on('mouseout',function () {
+                    clearInterval(timer);
+                    go();
+                })
+                //点击按钮
+                $(element).children('a').on('click',function () {
+                    if(!$ele.is(":animated")){
+                        clearInterval(timer);
+                        if(!$(this).index()){
+                            if (index == 0) {
+                                index = imgLen - 1;
+                                $ele.css("left", -(imgLen - 1) * wLi);
+                            }
+                            index--;
+                        }else{
+                            console.log(100);
+                            index++;
+                        }
+                        move();
+                    }
+                })
+            },
+            scope:{
+                paths:"=path",
+                interval:'@',
+                flag:'@'
+            }
+        }
+    })
+</script>
+</body>
+</html>
