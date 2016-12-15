@@ -12,7 +12,7 @@
 <!--1.在input输入内容时会在当前作用域上声明一个变量，-->
 <script>
     var app = angular.module('appModule',[]);
-    app.run(function ($rootScope,$timeout) {
+    app.run(function ($rootScope,$timout) {
         $timeout(function () {
             $rootScope.name = 8888;
         },4000)
@@ -32,6 +32,8 @@
                 scope.$watch(attrs['zfModel'],function (newVal,oldVal) {
                     element.val(newVal);
                 });
+
+                //注入
             }
         }
     })
