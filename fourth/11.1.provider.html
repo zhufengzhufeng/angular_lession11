@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl1"></div>
+<div ng-controller="myCtrl2"></div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //provider 唯一一个可以配置的服务
+    var app = angular.module('appModule',[]);
+    //用来配置服务的
+    app.config(function (calcProvider) {//在需要配置的provider后面加Provider，calcProvider代表的就是函数中的this
+        calcProvider.currency = '$';
+    });
+    app.provider('calc',function () {
+        this.currency = '￡';
+        this.$get = function () {
+            return {
+                //这里的this都是calc
+                '+':(a,b)=> this.currency+(a+b),
+                '-':(a,b)=> this.currency+(a-b),
+            }
+        }
+    });
+    app.controller('myCtrl1',function ($scope,$timeout,calc) {
+        console.log(calc['+'](1,2));
+    });
+    app.controller('myCtrl2',function ($scope,$timeout,calc) {
+        console.log(calc['+'](1,2));
+    });
+</script>
+</body>
+</html>

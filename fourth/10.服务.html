@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl1"></div>
+<div ng-controller="myCtrl2"></div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    //服务的目的：封装代码，util.js,写好后，可以在任意一个控制器中注入使用
+    //服务：五种服务一种装饰
+    //provider "factory" service value constant
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl1',function ($scope,$timeout) {
+        $timeout.a = 1;
+    });
+    app.controller('myCtrl2',function ($scope,$timeout) {
+
+    });
+    //服务 例如$timeout $interval 单例的
+</script>
+</body>
+</html>
