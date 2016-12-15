@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body ng-controller="ctrl">
+{{time | date:'hh:mm:ss'}}
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl',function ($scope,$interval,$timeout) {
+        $scope.time = new Date().getTime();
+        //原生js改变数据是不会触发视图刷新的
+       /* setInterval(function () {
+            $scope.time = new Date().getTime();
+            //每次修改后要通知angular来修改视图
+            $scope.$apply();//原生修改数据时使用
+        },1000);*/
+
+        var timer = $interval(function () { //$interval是自带的，会触发视图的刷新 (服务)
+            $scope.time = new Date().getTime();
+            //$scope.$apply();
+            //$interval.cancel(timer);
+        },1000);
+    });
+</script>
+</body>
+</html>
