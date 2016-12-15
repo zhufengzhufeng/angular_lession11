@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl1"></div>
+<div ng-controller="myCtrl2"></div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //factory中直接后面的函数就是$get,factory是通过provider衍生出来的
+    app.factory('calc', function () {//就是$get方法
+        return {
+            '+':function (a,b) {return (a+b)},
+            '-':function (a,b) {return (a-b)},
+        }
+    });
+    app.controller('myCtrl1',function ($scope,$timeout,calc) {
+        //console.log(calc['+'](1,2));
+    });
+    app.controller('myCtrl2',function ($scope,$timeout) {
+        //console.log(calc['+'](1,2));
+    });
+</script>
+</body>
+</html>
