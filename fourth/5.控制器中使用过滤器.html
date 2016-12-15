@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body NG-CONTROLLER="myCtrl">
+{{name}}
+{{datas}}
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    //将原有的过滤+大写的filter注入到我们的控制器中
+    app.controller('myCtrl',function ($scope,uppercaseFilter,numberFilter,currencyFilter,orderByFilter,dateFilter,filterFilter,limitToFilter,jsonFilter) {
+          //用包装后的过滤器加（）执行放入想要过滤的数据和参数
+//        $scope.name = uppercaseFilter('zfpx');
+//        $scope.name = numberFilter('111.111',2);
+          $scope.name = currencyFilter('111.111','%',1);
+          $scope.data = [{name:1,age:30},{name:2,age:18},{name:3,age:99}];
+         //根据age进行排序，将排序好的内容展示到ul里
+          $scope.datas = filterFilter(orderByFilter($scope.data,'age',false),{age:18});
+         //只要在控制器，过滤器中使用原有的过滤器就在后面加上Filter
+    });
+</script>
+</body>
+</html>

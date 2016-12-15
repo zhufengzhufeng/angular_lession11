@@ -5,19 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-{{'100'| jw:'zf':'qq'}}
-{{'welcome to beijing' | captialize}}
+<!--{{'100'| jw:'zf':'qq'}}-->
+{{'welcome       to    beijing' | capitalize}}
 <script src="node_modules/angular/angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
     //通过模块创建过滤器
-    app.filter('jw',function () {
+    /*app.filter('jw',function () {
         //目的是通过参数和原有的数据，进行改变内容
         return function (data,param1,param2) {//默认返回一个函数，在函数中返回结果则是过滤后的结果
             //data是我们要格式化的数据 param1是：后第一个参数 param2是第二个：的参数
             return param1+data+param2;
         }
-    });
+    });*/
+    app.filter('capitalize',function (uppercaseFilter) {
+        return function (data, param1, param2) {
+            var reg=/^[a-z]| [a-z]/g;
+            data=data.replace(reg,function (item, index) {
+                return uppercaseFilter(item);
+             });
+            return data;
+        }
+    })
 
 </script>
 </body>

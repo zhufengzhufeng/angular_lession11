@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body ng-controller="ctrl">
+<input type="text" ng-model="name" ng-change="fn()">
+{{age}}
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl',function ($scope) {
+        //监控name变量的变化，只要有变化执行对应的回调函数，将新值和旧值传入到回掉函数中
+        //ng-change和watch区别
+        //1.ng-change只能加在输入框中，不能监听页面数据变化
+        $scope.$watch('age',function (newVal,oldValue) {
+            console.log(newVal,oldValue);
+        });
+       $scope.fn = function(){
+            $scope.age = parseInt($scope.name)+1;
+        }
+    });
+</script>
+</body>
+</html>
