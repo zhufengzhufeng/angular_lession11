@@ -12,14 +12,25 @@
 <!--1.在input输入内容时会在当前作用域上声明一个变量，-->
 <script>
     var app = angular.module('appModule',[]);
+    app.run(function ($rootScope,$timeout) {
+        $timeout(function () {
+            $rootScope.name = 8888;
+        },4000)
+    });
     app.directive('zfModel',function () {
         return {
             link:function (scope,element,attrs) {
-                //当用户输入时触发的事件
+                //当用户输入时触发的事件(修改视图 导致数据变化)
                 element.on('input',function () {
                     //取当前zf-model对应的名字，给scope赋值
                     scope[attrs['zfModel']] =  this.value;//数据改变，但是视图没有跟随刷新
                     scope.$apply();
+                });
+                //如果数据变化input框内容会变化吗
+                //数据变化的时候，监听变化后的结果，赋予给input的value属性
+                //监听作用域上的值的变化
+                scope.$watch(attrs['zfModel'],function (newVal,oldVal) {
+                    element.val(newVal);
                 });
             }
         }
