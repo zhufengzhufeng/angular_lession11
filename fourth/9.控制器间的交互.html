@@ -37,8 +37,12 @@
         });
         $scope.$on('你还敢叫老子',function (e,data) {
             $scope.count = data/30;
-        })
+        });
     });
+    //on方法负责监听
+    // broadcast需要向下广播（自己也能听到）
+    // 向上广播emit（自己也能听到）
+
 </script>
 </body>
 </html>
