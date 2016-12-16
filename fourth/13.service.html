@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="myCtrl1"></div>
+<div ng-controller="myCtrl2"></div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.service('calc', function () {//就是$get方法
+        //这个构造函数是factory返回对象的构造函数
+        this['+'] = function (a,b) {return (a+b)};
+        this['-'] = function (a,b) {return (a-b)};
+    });
+    app.controller('myCtrl1',function ($scope,$timeout,calc) {
+        console.log(calc['+'](1,2));
+    });
+    app.controller('myCtrl2',function ($scope,$timeout,calc ) {
+        console.log(calc['+'](1,2));
+    });
+</script>
+</body>
+</html>
