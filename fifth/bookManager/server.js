@@ -33,6 +33,26 @@ http.createServer(function (req,res) {
             case 'POST':
                 break;
             case 'PUT':
+                //能接收到id
+                if(id){//要修改的id
+                    var str = ''; //接受到的请求体
+                    req.on('data',function (data) {
+                        str+=data;
+                    });
+                    req.on('end',function () {
+                        var content = JSON.parse(str);//{name:1,price:2}
+                        var target = '';
+                        books = books.map(function (item,index) {
+                            if(item.id == id){
+                                item.price = content.price;
+                                item.name = content.name;
+                                target = item;
+                            }
+                            return item;
+                        });
+                        res.end(JSON.stringify(target));//返回修改的那一项
+                    });
+                }
                 break;
         }
     }else{

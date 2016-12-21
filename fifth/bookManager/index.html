@@ -23,7 +23,7 @@
         <td ><input type="text" ng-model="b.count"></td>
         <td>{{b.price*b.count}}</td>
         <td>
-            <button class="btn btn-danger" ng-click="remove(b)">删除</button>                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modal">
+            <button class="btn btn-danger" ng-click="remove(b)">删除</button>                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modal" ng-click="update(b)">
                 修改
             </button>
         </td>
@@ -46,22 +46,16 @@
                 <h4 class="modal-title">请修改</h4>
             </div>
             <div class="modal-body">
-                书名<input type="text"/>
-                书的价格 <input type="text">
+                书名<input type="text" ng-model="name"/>
+                书的价格 <input type="text" ng-model="price">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" ng-click="save()" data-dismiss="modal">保存</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 
 <script src="node_modules/angular/angular.js"></script>
@@ -90,7 +84,26 @@
                 });
             })
         };
+        $scope.now = -1; //当我点击修改时，存储当前选择的是哪一个
+        $scope.update = function (b) { //点击按钮将数据传入到modal框里
+            //b是当前点击的数据  放到输入框中
+            $scope.name = b.name;
+            $scope.price = b.price;
+            $scope.now = b.id;
+        };
+        $scope.save = function () { //点击框中的按钮保存
+            Books.update({bid:$scope.now},{name:$scope.name,price:$scope.price}).$promise.then(function (data) {//获取的是修改后的数据
+                //{id,name,count,price}
+                $scope.books = $scope.books.map(function (item,index) {
+                    if(item.id == data.id){
+                        return data;
+                    }
+                    return item;
+                });
+            })
+        }
     }]);
+
 </script>
 </body>
 </html>
