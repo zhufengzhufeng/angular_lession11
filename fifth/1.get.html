@@ -11,10 +11,12 @@
 <script>
     var app = angular.module('appModule',[]);
     app.controller('myCtrl',function ($scope,$http,$interval) {
-        //post是将数据放到请求体中，传到服务端
-        $http.post('/post',{name:'zfpx',age:8}).then(function (res) {
-            $scope.timer = res.data;
-        });
+        //$http是angular中的内置服务，提供了数据交互 get post jsonp
+        $interval(function () {
+            $http.get('/clock').then(function (res) {//res把数据存放在res.data属性中
+                $scope.timer = res.data;
+            });
+        },1000);
     });
 </script>
 </body>

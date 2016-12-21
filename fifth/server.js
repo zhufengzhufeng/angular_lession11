@@ -10,6 +10,22 @@ http.createServer(function (req,res) {//当请求到来时执行此监听函数
     if(pathname == '/'){
         res.setHeader('Content-Type','text/html;charset=utf8');
         fs.createReadStream('./index.html').pipe(res);
+    }else if(pathname == '/clock'){
+        res.end(new Date().getTime().toString());
+    }else if(pathname == '/post'){
+        //接受post请求
+        var str = '';
+        req.on('data',function (data) {
+            str+=data;
+        });
+        req.on('end',function () {
+            console.log(str);
+            res.end(str);
+        })
+    }else if(pathname == '/jsonp'){
+        var fnName = urlObj.query.cb;//获取浏览器端发送请求时的查询参数
+        var obj = JSON.stringify({name:'zfpx',age:8});
+        res.end(`${fnName}(${obj})`); //getData({name:'zfpx',age:8})
     }
     //当访问首页时，首页中引入css js会对我们的服务器在次发送请求
     else{
@@ -24,5 +40,5 @@ http.createServer(function (req,res) {//当请求到来时执行此监听函数
             }
         });
     }
-
+    //http-server 可以启动一个静态服务器（命令行工具）
 }).listen(8080);
