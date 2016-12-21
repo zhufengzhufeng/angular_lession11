@@ -16,9 +16,9 @@ http.createServer(function (req,res) {//当请求到来时执行此监听函数
             str+=data;
         });
         req.on('end',function () {
-            //{username:zfpx,age:1}  username=zfpx&age=1
-            res.end(str);
-        })
+            // username=zfpx&age=1 =>{username:zfpx,age:1}
+            res.end(JSON.stringify(require('querystring').parse(str)));
+        });
     }else if(pathname == '/clock'){
         res.end(new Date().getTime().toString());
     }else if(pathname == '/post'){

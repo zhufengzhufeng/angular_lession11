@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="myCtrl">
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-resource/angular-resource.js"></script>
+<script>
+    //angular-resource 提供了restful的风格
+    //要使用angular-resource这个模块,依赖的模块ngResource
+    //ng-resource模块只提供一个$resource
+    var app = angular.module('appModule',['ngResource']);
+    app.factory('user',function ($resource) {
+        return $resource('/user/:uid',null,{
+            update:{method:'put'}
+        });
+    });
+    app.controller('myCtrl',function ($scope,$http,user) {
+        //想封装（factory）一个对用户的增删改查的功能
+        //user.get({uid:1}); //   /user/1   get
+        //user.query()  /user get
+        //user.save({name:1,age:2}) /user post 请求体
+        //user.remove({uid:1}) /user/1   delete
+        //user.update({uid:1},{name:1,age:2}) /user/1 put  请求体
+    });
+</script>
+</body>
+</html>

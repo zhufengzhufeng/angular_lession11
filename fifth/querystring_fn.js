@@ -6,3 +6,4 @@ var obj = querystring.parse(str,'&&','!=');
 //默认通过& = 进行解析
 //console.log(obj);
 console.log(querystring.stringify(obj,'**','||'));
+//第二个参数是字段分隔符 第三个参数是key value分隔符
