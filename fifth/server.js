@@ -9,7 +9,16 @@ http.createServer(function (req,res) {//当请求到来时执行此监听函数
     //默认访问网站的路径是/
     if(pathname == '/'){
         res.setHeader('Content-Type','text/html;charset=utf8');
-        fs.createReadStream('./index.html').pipe(res);
+        fs.createReadStream('./5.form.html').pipe(res);
+    }else if(pathname == '/user'){//接受的是表单提交的数据
+        var str = '';
+        req.on('data',function (data) {
+            str+=data;
+        });
+        req.on('end',function () {
+            //{username:zfpx,age:1}  username=zfpx&age=1
+            res.end(str);
+        })
     }else if(pathname == '/clock'){
         res.end(new Date().getTime().toString());
     }else if(pathname == '/post'){
@@ -23,7 +32,8 @@ http.createServer(function (req,res) {//当请求到来时执行此监听函数
             res.end(str);
         })
     }else if(pathname == '/jsonp'){
-        var fnName = urlObj.query.cb;//获取浏览器端发送请求时的查询参数
+        var fnName = urlObj.query.callback;//获取浏览器端发送请求时的查询参数
+        console.log(fnName);//如果是ng 名字随机
         var obj = JSON.stringify({name:'zfpx',age:8});
         res.end(`${fnName}(${obj})`); //getData({name:'zfpx',age:8})
     }

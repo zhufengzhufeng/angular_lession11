@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--?username=123&password=123-->
+<!--post请求发送数据 username=123&password=123 formdata-->
+<!--后端想收到的时候格式化成json-->
+<form method="post" action="/user" >
+    用户名:<input type="text" name="username"> <br>
+    <!--必须增加name属性-->
+    密码:<input type="text" name="password"> <br>
+    <button>提交</button>
+</form>
+<!--{name:1,age:2}-->
+</body>
+</html>
