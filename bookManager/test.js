@@ -13,7 +13,22 @@ var newBook = {
     "id": 3
 };
 //先获取 在写入
-
+//1. 只要读取就要写一个路径 2.不指定utf8  3.不处理错误 4，json.parse
+function getBooks(fn) {
+    fs.readFile('./book.json','utf8',function (err,data) {
+        if(err){
+            fn([])
+        }else{
+            fn(JSON.parse(data));
+        }
+    });
+}
+getBooks(function (data) {
+    data.push(newBook);//加入内容
+    fs.writeFile('./book.json',JSON.stringify(data),function () {
+        console.log('成功');
+    })
+});
 //3.修改
 
 
