@@ -32,6 +32,11 @@
         var app = angular.module('appModule',['ngResource','ngRoute']);
         //配置路由 ,需要用到ngRoute中的服务进行配置 配置时增加大写的Provider
         //为了不跳转页面采用hash值得方式，并且会产生历史管理
+        app.factory('Book',function ($resource) {
+            return $resource('/books/:id',null,{
+                update:{method:'put'}
+            });
+        });
         app.config(function ($routeProvider) {
             //1.路由的路径 2.配置好的路由 当路由切换时会将内容放置到对应的ng-view里
             $routeProvider.when('/',{
@@ -46,12 +51,17 @@
             }).otherwise('/');
             //配置404路由
         });
-        app.controller('homeCtrl',function ($scope,$sce) {
+        app.controller('homeCtrl',function ($scope,$sce,Book) {
             $scope.title = $sce.trustAsHtml('<h1>快来围观，书城</h1>');
             $('.carousel').carousel({interval:2000});
         });
-        app.controller('listCtrl',function ($scope) {});
-        app.controller('addCtrl',function ($scope) {});
+        app.controller('listCtrl',function ($scope,Book) {
+            //写入动态数据
+            $scope.books = Book.query();
+        });
+        app.controller('addCtrl',function ($scope,Book) {
+
+        });
     </script>
 </body>
 </html>
