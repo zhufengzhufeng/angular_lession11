@@ -16559,14 +16559,14 @@ function $$QProvider() {
 }
 
 /**
- * Constructs a promise manager.
+ * Constructs a promise bookManager.
  *
  * @param {function(function)} nextTick Function for executing functions in the next turn.
  * @param {function(...*)} exceptionHandler Function into which unexpected exceptions are passed for
  *     debugging purposes.
  @ param {=boolean} errorOnUnhandledRejections Whether an error should be generated on unhandled
  *     promises rejections.
- * @returns {object} Promise manager.
+ * @returns {object} Promise bookManager.
  */
 function qFactory(nextTick, exceptionHandler, errorOnUnhandledRejections) {
   var $qMinErr = minErr('$q', TypeError);

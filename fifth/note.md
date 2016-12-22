@@ -31,3 +31,20 @@ http-server
 - /user/1 get 返回一个对象
 
 ## 需要一个模块进行交互angular-resource
+
+
+## ionic+ cordova + angularjs
+- 安装ionic和cordova
+```
+npm install ionic cordova -g
+```
+- 自动生成angular项目
+```
+ionic start 项目名
+```
+
+## android和ios打包
+- ios打包只能在mac本上 ipa
+- android apk
+
+> 打包android 需要安装java android sdk
