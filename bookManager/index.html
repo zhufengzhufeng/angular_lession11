@@ -72,13 +72,32 @@
         });
         app.controller('detailCtrl',function ($scope,$routeParams,Book,$location) {
             //console.log($routeParams.id);//路径参数对象
-            $scope.book = Book.get({id:$routeParams.id});
+            Book.get({id:$routeParams.id}).$promise.then(function (data) {
+                $scope.book =data;
+                //clone一个完全一样的对象
+                $scope.b = JSON.parse(JSON.stringify($scope.book));
+            });
             //删除
             $scope.remove = function () {
                 Book.delete({id:$routeParams.id}).$promise.then(function () {
                     $location.path('/list');
                 })
-            }
+            };
+            //控制显示和隐藏
+            $scope.flag = false;
+            //取消 控制显示和隐藏
+            $scope.change = function () {
+                $scope.flag = !$scope.flag;
+                $scope.b = JSON.parse(JSON.stringify($scope.book));
+            };
+            //修改的逻辑
+            $scope.update = function () {
+                //   传递需要改变的id   改变成什么数据
+                Book.update({id:$routeParams.id},$scope.b).$promise.then(function () {
+                    $scope.flag = false;
+                    $scope.book = $scope.b;//改完后 同步最新的数据
+                })
+            };
         });
     </script>
 </body>

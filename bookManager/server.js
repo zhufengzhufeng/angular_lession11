@@ -72,6 +72,26 @@ var server = http.createServer(function (req,res) {
                 }
                 break;
             case 'PUT':
+                if(id){
+                    var str = '';
+                    req.on('data',function (data) {
+                        str+=data;
+                    });
+                    req.on('end',function () {
+                        var book = JSON.parse(str);
+                        getBooks(function (data) {
+                            data = data.map(function (item) {
+                                if(item.id == id){
+                                    return book;
+                                }
+                                return item
+                            });
+                            setBooks(data,function () {
+                                res.end(JSON.stringify(book));//返回修改的那一项
+                            });
+                        });
+                    })
+                }
                 break;
         }
     }else{
