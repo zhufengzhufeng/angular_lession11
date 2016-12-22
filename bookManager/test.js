@@ -23,13 +23,22 @@ function getBooks(fn) {
         }
     });
 }
-getBooks(function (data) {
+function setBooks(data,cb) {
+    fs.writeFile('./book.json',JSON.stringify(data),cb);
+}
+/*getBooks(function (data) {//拿到的就是读取后的json
     data.push(newBook);//加入内容
-    fs.writeFile('./book.json',JSON.stringify(data),function () {
+    setBooks(data,function () {//只需传递数据 和回掉函数，setBooks内部会自动stringify 写入后在调用fn
         console.log('成功');
+    });
+});*/
+//3.删除 id = 3 全部删除掉
+getBooks(function (data) {
+    data = data.filter (function (item) {
+        return item.id != 3;
+    });
+    setBooks(data,function () {
+        console.log('删除成功');
     })
 });
-//3.修改
-
-
-//4.删除
+//4.修改  id=2 name=>hello 改map
