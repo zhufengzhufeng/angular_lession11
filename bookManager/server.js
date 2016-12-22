@@ -28,7 +28,12 @@ var server = http.createServer(function (req,res) {
         switch (req.method){
             case 'GET':
                 if(id){ //查询某个
-
+                    getBooks(function (data) {
+                        var book = data.find(function (item) {
+                            return item.id == id; //返回true 表示找到了会返回出当前找到的对象
+                        });
+                        res.end(JSON.stringify(book));
+                    })
                 }else{ //查询所有
                     getBooks(function (data) {
                         res.end(JSON.stringify(data));

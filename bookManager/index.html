@@ -48,6 +48,9 @@
             }).when('/add',{
                 templateUrl:'tmpl/add.html',
                 controller:'addCtrl'
+            }).when('/detail/:id',{ // /detail/2  -> $routeParams {id:2}
+                templateUrl:'tmpl/detail.html',
+                controller:'detailCtrl'
             }).otherwise('/');
             //配置404路由
         });
@@ -66,6 +69,10 @@
                 });
                 //添加图书 post   window.location.href
             }
+        });
+        app.controller('detailCtrl',function ($scope,$routeParams,Book) {
+            //console.log($routeParams.id);//路径参数对象
+            $scope.book = Book.get({id:$routeParams.id});
         });
     </script>
 </body>
