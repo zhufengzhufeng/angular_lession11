@@ -70,9 +70,15 @@
                 //添加图书 post   window.location.href
             }
         });
-        app.controller('detailCtrl',function ($scope,$routeParams,Book) {
+        app.controller('detailCtrl',function ($scope,$routeParams,Book,$location) {
             //console.log($routeParams.id);//路径参数对象
             $scope.book = Book.get({id:$routeParams.id});
+            //删除
+            $scope.remove = function () {
+                Book.delete({id:$routeParams.id}).$promise.then(function () {
+                    $location.path('/list');
+                })
+            }
         });
     </script>
 </body>

@@ -60,6 +60,16 @@ var server = http.createServer(function (req,res) {
                 });
                 break;
             case 'DELETE':
+                if(id){
+                    getBooks(function (data) {
+                        data = data.filter(function (item) {
+                            return item.id !=id;
+                        });
+                        setBooks(data,function () {
+                            res.end(JSON.stringify({}));
+                        });
+                    });
+                }
                 break;
             case 'PUT':
                 break;
