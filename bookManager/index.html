@@ -59,8 +59,13 @@
             //写入动态数据
             $scope.books = Book.query();
         });
-        app.controller('addCtrl',function ($scope,Book) {
-
+        app.controller('addCtrl',function ($scope,Book,$location) {
+            $scope.add = function () {
+                Book.save($scope.book).$promise.then(function () {
+                    $location.path('/list');//保存成功后去list页面
+                });
+                //添加图书 post   window.location.href
+            }
         });
     </script>
 </body>

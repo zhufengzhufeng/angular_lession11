@@ -33,12 +33,23 @@ function setBooks(data,cb) {
     });
 });*/
 //3.删除 id = 3 全部删除掉
-getBooks(function (data) {
+/*getBooks(function (data) {
     data = data.filter (function (item) {
         return item.id != 3;
     });
     setBooks(data,function () {
         console.log('删除成功');
     })
-});
+});*/
 //4.修改  id=2 name=>hello 改map
+getBooks(function(data){
+    data=data.map(function(item){
+        if(item.id==2){
+            item.bookName="hello"
+        }
+        return item;
+    });
+    setBooks(data,function(){
+        console.log("修改成功");
+    })
+})
